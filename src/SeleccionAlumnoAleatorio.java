@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,20 +15,23 @@ public class SeleccionAlumnoAleatorio {
             Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/daw1", "root", "");
 
             // Obtener los datos de la tabla 'alumno' de la base de datos
-            String selectQuery = "SELECT nombre, intervenciones FROM alumno";
+            String selectQuery = "SELECT nombre, intervenciones, fecha_intervencion FROM alumno";
             PreparedStatement selectStatement = conn.prepareStatement(selectQuery);
             ResultSet resultSet = selectStatement.executeQuery();
 
-            // Crear listas para almacenar los nombres e intervenciones de los alumnos
+            // Crear listas para almacenar los nombres, intervenciones y fechas de intervención de los alumnos
             List<String> nombres = new ArrayList<>();
             List<Integer> intervenciones = new ArrayList<>();
+            List<Timestamp> fechasIntervencion = new ArrayList<>();
 
             // Obtener los datos de la base de datos y almacenarlos en las listas correspondientes
             while (resultSet.next()) {
                 String nombre = resultSet.getString("nombre");
                 int numIntervenciones = resultSet.getInt("intervenciones");
+                Timestamp fechaIntervencion = resultSet.getTimestamp("fecha_intervencion");
                 nombres.add(nombre);
                 intervenciones.add(numIntervenciones);
+                fechasIntervencion.add(fechaIntervencion);
             }
 
             // Buscar el alumno con menos intervenciones
@@ -59,16 +63,21 @@ public class SeleccionAlumnoAleatorio {
             System.out.println("- No. Introduzca 'no'");
             String respuesta = hechoNoHecho.nextLine();
 
-            // Actualizar las intervenciones del alumno si ha realizado el ejercicio
+            // Actualizar las intervenciones y la fecha de intervención del alumno si ha realizado el ejercicio
             if (respuesta.equals("yes")) {
                 int actualizacionIntervenciones = menosIntervenciones + 1;
                 intervenciones.set(posicionAleatoria, actualizacionIntervenciones);
 
+                // Actualizar la fecha de intervención actual
+                Timestamp nuevaFechaIntervencion = new Timestamp(System.currentTimeMillis());
+                fechasIntervencion.set(posicionAleatoria, nuevaFechaIntervencion);
+
                 // Actualizar los datos en la base de datos
-                String updateQuery = "UPDATE alumno SET intervenciones = ? WHERE nombre = ?";
+                String updateQuery = "UPDATE alumno SET intervenciones = ?, fecha_intervencion = ? WHERE nombre = ?";
                 PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
                 updateStatement.setInt(1, actualizacionIntervenciones);
-                updateStatement.setString(2, corrector);
+                updateStatement.setTimestamp(2, nuevaFechaIntervencion);
+                updateStatement.setString(3, corrector);
                 updateStatement.executeUpdate();
 
                 System.out.println("El número de intervenciones del alumno ha aumentado");

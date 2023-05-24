@@ -20,8 +20,15 @@ public class Menu {
             System.out.println("2. Importar XML a la base de datos");
             System.out.println("3. Seleccionar alumno");
             System.out.println("4. Alumnos con más y menos intervenciones");
-            System.out.println("5. Poner a 0 todas las intervenciones");
-            System.out.println("6. Salir");
+            System.out.println("5. Borra la base de datos");
+            System.out.println("6. Alumnos con intervenciones menor a la media");
+            System.out.println("7. Alumnos con intervenciones mayor, igual y superior a valor dado");
+            System.out.println("8. Información del alumno");
+            System.out.println("9. Dar de alta a alumno nuevo");
+            System.out.println("10. Modificar datos de alumno");
+            System.out.println("11. Borrar alumno");
+            System.out.println("12. Exportar Base de datos a XML");
+            System.out.println("13. Salir");
 
 
             try {
@@ -48,13 +55,42 @@ public class Menu {
                         break;
                     case 5:
                         System.out.println("Has seleccionado opción 5" );
-                        //Daw1.daw1();
+                        BorrarBasedeDatos.borraBaseDeDatos();
                         break;
                     case 6:
+                        System.out.println("Has seleccionado opción 6" );
+                        MenorQueLaMedia.menorQueLaMedia();
+                        break;
+                    case 7:
+                        System.out.println("Has seleccionado opción 7" );
+                        AlumnosPorValorDado.alumnosPorValorDado();
+                        break;
+                    case 8:
+                        System.out.println("Has seleccionado opción 8" );
+                        InformacionAlumno.informacionAlumno();
+                        break;
+                    case 9:
+                        System.out.println("Has seleccionado opción 9" );
+                        GestionAlumnos.agregarAlumno();
+                        break;
+                    case 10:
+                        System.out.println("Has seleccionado opción 10" );
+                        GestionAlumnos.modificarAlumno();
+                        break;
+                    case 11:
+                        System.out.println("Has seleccionado opción 11" );
+                        GestionAlumnos.eliminarAlumno();
+                        break;
+                    case 12:
+                        System.out.println("Has seleccionado opción 12" );
+                        BaseDeDatosaXML.exportarDatos();
+                        break;
+                    case 13:
+                        System.out.println("Has seleccionado opción 13" );
                         salir = true;
                         break;
                     default:
-                        System.out.println("Solo números entre 1 y 6");
+                        System.out.println("Solo números entre 1 y 13");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Debe insertar un número");
