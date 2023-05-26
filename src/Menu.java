@@ -1,9 +1,3 @@
-
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -28,7 +22,9 @@ public class Menu {
             System.out.println("10. Modificar datos de alumno");
             System.out.println("11. Borrar alumno");
             System.out.println("12. Exportar Base de datos a XML");
-            System.out.println("13. Salir");
+            System.out.println("13. Importar CSV a la base de datos");
+            System.out.println("14. Exportar Base de datos a CSV");
+            System.out.println("15. Salir");
 
 
             try {
@@ -36,65 +32,72 @@ public class Menu {
                 System.out.println("Escriba una de las opciones");
                 opcion = sn.nextInt();
 
-                switch(opcion) {
-                    case 1:
+                switch (opcion) {
+                    case 1 -> {
                         System.out.println("Has seleccionado opción 1");
                         CrearBasedeDatos.creaBaseDeDatos();
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         System.out.println("Has seleccionado opción 2");
                         XMLaBaseDeDatos.xmlToDatabase();
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         System.out.println("Has seleccionado opción 3");
                         SeleccionAlumnoAleatorio.seleccionAlumno();
-                        break;
-                    case 4:
+                    }
+                    case 4 -> {
                         System.out.println("Has seleccionado opción 4");
                         EstadisticasAlumnos.estadisticasAlumnos();
-                        break;
-                    case 5:
-                        System.out.println("Has seleccionado opción 5" );
+                    }
+                    case 5 -> {
+                        System.out.println("Has seleccionado opción 5");
                         BorrarBasedeDatos.borraBaseDeDatos();
-                        break;
-                    case 6:
-                        System.out.println("Has seleccionado opción 6" );
+                    }
+                    case 6 -> {
+                        System.out.println("Has seleccionado opción 6");
                         MenorQueLaMedia.menorQueLaMedia();
-                        break;
-                    case 7:
-                        System.out.println("Has seleccionado opción 7" );
+                    }
+                    case 7 -> {
+                        System.out.println("Has seleccionado opción 7");
                         AlumnosPorValorDado.alumnosPorValorDado();
-                        break;
-                    case 8:
-                        System.out.println("Has seleccionado opción 8" );
+                    }
+                    case 8 -> {
+                        System.out.println("Has seleccionado opción 8");
                         InformacionAlumno.informacionAlumno();
-                        break;
-                    case 9:
-                        System.out.println("Has seleccionado opción 9" );
+                    }
+                    case 9 -> {
+                        System.out.println("Has seleccionado opción 9");
                         GestionAlumnos.agregarAlumno();
-                        break;
-                    case 10:
-                        System.out.println("Has seleccionado opción 10" );
+                    }
+                    case 10 -> {
+                        System.out.println("Has seleccionado opción 10");
                         GestionAlumnos.modificarAlumno();
-                        break;
-                    case 11:
-                        System.out.println("Has seleccionado opción 11" );
+                    }
+                    case 11 -> {
+                        System.out.println("Has seleccionado opción 11");
                         GestionAlumnos.eliminarAlumno();
-                        break;
-                    case 12:
-                        System.out.println("Has seleccionado opción 12" );
+                    }
+                    case 12 -> {
+                        System.out.println("Has seleccionado opción 12");
                         BaseDeDatosaXML.exportarDatos();
-                        break;
-                    case 13:
-                        System.out.println("Has seleccionado opción 13" );
+                    }
+                    case 13 -> {
+                        System.out.println("Has seleccionado opción 13");
+                        CSVABaseDeDatos.importaCSV();
+                    }
+                    case 14 -> {
+                        System.out.println("Has seleccionado opción 14");
+                        BaseDeDatosACSV.exportarBaseDeDatos();
+                    }
+                    case 15 -> {
+                        System.out.println("Has seleccionado opción 15");
                         salir = true;
-                        break;
-                    default:
-                        System.out.println("Solo números entre 1 y 13");
+                    }
+                    default -> System.out.println("Solo números entre 1 y 13");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Debe insertar un número");
-                sn.next();
+
             }
         }
     }
