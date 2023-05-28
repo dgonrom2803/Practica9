@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -5,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Scanner;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,10 +16,9 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class BaseDeDatosaXML {
     public static void exportarDatos() {
@@ -47,19 +49,16 @@ public class BaseDeDatosaXML {
 
                 // Obtener los metadatos del resultado de la consulta
                 ResultSetMetaData metaData = resultSet.getMetaData();
-
-                // Crear el elemento para cada tabla
-                Element tableElement = doc.createElement("daw1");
-                rootElement.appendChild(tableElement);
+                int columnCount = metaData.getColumnCount();
 
                 // Iterar sobre los resultados de la consulta
                 while (resultSet.next()) {
                     // Crear un elemento para cada fila de datos
                     Element rowElement = doc.createElement(tableName);
-                    tableElement.appendChild(rowElement);
+                    rootElement.appendChild(rowElement);
 
-                    // Obtener los valores de cada columna y crear los elementos correspondientes
-                    for (int i = 1; i <= metaData.getColumnCount(); i++) {
+                    // Iterar sobre las columnas y crear elementos correspondientes
+                    for (int i = 1; i <= columnCount; i++) {
                         String columnName = metaData.getColumnName(i);
                         String columnValue = resultSet.getString(i);
 
