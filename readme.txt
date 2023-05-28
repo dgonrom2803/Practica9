@@ -1,6 +1,7 @@
 *EXPLICACIÓN DEL CÓDIGO*
 ===================================
 El código es una aplicación de consola impulsada por menú que permite al usuario crear y administrar una base de datos de estudiantes.
+
 Aquí hay una explicación detallada de cómo funciona:
 
 
@@ -91,6 +92,9 @@ la tarea seleccionada, como crear una nueva base de datos o seleccionar un estud
 ===================================
 La versión actual de este proyecto es la 4.1.0, lanzada el 28 de mayo de 2023. Esta versión incluye las siguientes características y mejoras:
 
+
 Nueva funcionalidad - Interfaz gráfica para la creación y borrado de bases de datos
+
 Mejora de la funcionalidad - Gestión de alumnos
+
 Corrección de errores mínimos
